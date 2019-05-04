@@ -1,0 +1,14 @@
+<div class="btn-group">
+  <%= link_to(edit_department_path(department.id),
+              class: 'btn btn-white btn-xs') do %>
+      <%= fa_icon('pencil') %>
+      Edit
+  <% end %>
+
+  <%= link_to department_path(department.id),
+              class: 'btn btn-white btn-xs',
+              data: {confirm: 'Are you sure?', method: :delete} do %>
+      <%= fa_icon('trash') %>
+      Delete
+  <% end %>
+</div>

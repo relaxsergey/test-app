@@ -1,0 +1,19 @@
+<div class="ibox float-e-margins">
+  <div class="ibox-title">
+    <h5>Departments</h5>
+    <ol class="search_field">
+ <%= datagrid_form_for departments_grid,
+                    method: :get,
+                    url: departments_path %>
+</ol>
+    <div class="text-right">
+      <%= link_to 'Add department', new_department_path,
+                  class: 'btn btn-primary' %>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <%= datagrid_table(departments_grid,
+                       html: {class: 'table table-hover datagrid'}) %>
+    <%= will_paginate departments_grid.assets %>
+  </div>
+</div>
