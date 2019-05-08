@@ -3,6 +3,6 @@
     <h2>Edit employee</h2>
   </div>
   <div class="ibox-content">
-    <%= render 'form', form: form, url: employee_path(form.model.id) %>
+    <%= render 'form', form: form, url: employee_path(form.model.id), department_collection: department_collection %>
   </div>
 </div>

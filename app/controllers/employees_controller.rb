@@ -6,7 +6,7 @@ class EmployeesController < ApplicationController
 
   def index
     grid = EmployeesGrid.new(params[:employees_grid]) do |scope|
-      scope.page(params[:page]).per_page(5)
+      scope.includes(:department).page(params[:page]).per_page(5)
     end
 
     render :index, locals: { employees_grid: grid }
@@ -15,7 +15,7 @@ class EmployeesController < ApplicationController
   def new
     form = EmployeeForm.new(Employee.new)
     form.prepopulate!
-    render :new, locals: { form: form }
+    render :new, locals: { form: form, department_collection: department_collection }
   end
 
   def create
@@ -27,13 +27,13 @@ class EmployeesController < ApplicationController
 
     flash[:error] = 'Не все обязательные поля заполнены!'
     form.prepopulate!
-    render :new, locals: { form: form }
+    render :new, locals: { form: form, department_collection: department_collection }
   end
 
   def edit
     form = EmployeeForm.new(employee)
     form.prepopulate!
-    render :edit, locals: { form: form }
+    render :edit, locals: { form: form, department_collection: department_collection }
   end
 
   def update
@@ -45,7 +45,7 @@ class EmployeesController < ApplicationController
 
     flash[:error] = 'Не все обязательные поля заполнены!'
     form.prepopulate!
-    render :edit, locals: { form: form }
+    render :edit, locals: { form: form, department_collection: department_collection }
   end
 
   def destroy
@@ -62,5 +62,9 @@ class EmployeesController < ApplicationController
 
   def employee
     @employee ||= Employee.find(params[:id])
+  end
+
+  def department_collection
+    @department_collection ||= Department.pluck(:title, :id)
   end
 end

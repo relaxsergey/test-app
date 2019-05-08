@@ -23,7 +23,7 @@ class EmployeesGrid
   end
 
   column(:department, class: 'col-sm-2', html: true, order: true) do |record|
-    record.department.title
+    record.department.title if record.department.present?
   end
 
   column(:actions, header: '', html: true, order: false, class: 'col-sm-1') do |record|
